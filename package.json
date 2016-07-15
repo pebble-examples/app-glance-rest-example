@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/pebble-examples/app-glance-rest-example#readme",
   "dependencies": {
+    "node-env-file": "^0.1.8",
+    "node-schedule": "^1.1.1",
     "request": "^2.73.0"
   }
 }
