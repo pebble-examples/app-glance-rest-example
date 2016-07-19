@@ -2,34 +2,60 @@ var request  = require('request');
 var schedule = require('node-schedule');
 var env      = require('node-env-file');
 
+// Load enviroment settings
 env(__dirname + '/.env');
 
-//var j = schedule.scheduleJob({hour: 00, minute: 00}, function() {
-var j = schedule.scheduleJob('*/1 * * * *', function() {
-  // Run once per day
+// Run once per day
+var cronSchedule = { hour: 00, minute: 00 }
+
+if(process.env.DEBUG) {
+  // Run every minute
+  cronSchedule = '*/1 * * * *';
+}
+
+// Schedule the job
+var j = schedule.scheduleJob(cronSchedule, function() { 
   updateAppGlanceSlice();
 });
 
-
+// Send AppGlanceSlice to the REST API
 function updateAppGlanceSlice() {
-  console.log(process.env.TIMELINE_API_KEY);
-  return;
+  console.log('Sending AppGlanceSlice...');
 
-  //Lets configure and request
+  var dateToday = new Date();
+
+  var dateTomorrow = new Date();
+  dateTomorrow.setDate(dateTomorrow.getDate() + 1);
+
+  // Construct JSON containing our AppGlanceSlice
+  var data = {
+    "slices": [
+      {
+        "layout": {
+          "icon": "system://images/TIMELINE_BASEBALL",
+          "subtitleTemplateString": dateToday.toUTCString()
+        },
+        "expirationTime": dateTomorrow.toISOString()
+      }
+    ]
+  }
+
+  // Send a PUT request to the REST endpoint
   request({
-    url: 'https://modulus.io/contact/demo', //URL to hit
-    qs: {from: 'blog example', time: +new Date()}, //Query string data
-    method: 'POST',
-    //Lets post the following key/values as form
-    json: {
-      field1: 'data',
-      field2: 'data'
-    }
+    url: process.env.REST_ENDPOINT,
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-User-Token': process.env.REST_API_KEY
+    },
+    json: data
   }, function(error, response, body){
     if(error) {
-        console.log(error);
+      console.log('FAILED sending AppGlanceSlice...');
+      console.log(error);
     } else {
-        console.log(response.statusCode, body);
+      console.log('SUCCESS sending AppGlanceSlice...');
+      console.log(response.statusCode, body);
     } 
   }); 
 }
