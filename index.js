@@ -14,9 +14,7 @@ if(process.env.DEBUG) {
 }
 
 // Schedule the job
-var j = schedule.scheduleJob(cronSchedule, function() { 
-  updateAppGlanceSlice();
-});
+var j = schedule.scheduleJob(cronSchedule, updateAppGlanceSlice);
 
 // Send AppGlanceSlice to the REST API
 function updateAppGlanceSlice() {
@@ -59,6 +57,3 @@ function updateAppGlanceSlice() {
     } 
   }); 
 }
-
-
-
