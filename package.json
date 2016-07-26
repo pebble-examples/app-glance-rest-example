@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/pebble-examples/app-glance-rest-example.git"
   },
-  "author": "Jon Barlow <orviwan@gmail.com>",
+  "author": "Jon Barlow <jonb@pebble.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/pebble-examples/app-glance-rest-example/issues"
