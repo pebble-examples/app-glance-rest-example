@@ -1,0 +1,24 @@
+{
+  "name": "app-glance-rest-example",
+  "version": "1.0.0",
+  "description": "An example app which uses the AppGlance REST API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pebble-examples/app-glance-rest-example.git"
+  },
+  "author": "Jon Barlow <jonb@pebble.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pebble-examples/app-glance-rest-example/issues"
+  },
+  "homepage": "https://github.com/pebble-examples/app-glance-rest-example#readme",
+  "dependencies": {
+    "node-env-file": "^0.1.8",
+    "node-schedule": "^1.1.1",
+    "request": "^2.73.0"
+  }
+}
