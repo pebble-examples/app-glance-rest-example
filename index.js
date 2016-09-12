@@ -6,7 +6,7 @@ var env      = require('node-env-file');
 env(__dirname + '/.env');
 
 // Run once per day
-var cronSchedule = { hour: 00, minute: 00 }
+var cronSchedule = { hour: 0, minute: 0 };
 
 if(process.env.DEBUG) {
   // Run every minute
@@ -36,7 +36,7 @@ function updateAppGlanceSlice() {
         "expirationTime": dateTomorrow.toISOString()
       }
     ]
-  }
+  };
 
   // Send a PUT request to the REST endpoint
   request({
@@ -54,6 +54,6 @@ function updateAppGlanceSlice() {
     } else {
       console.log('SUCCESS sending AppGlanceSlice...');
       console.log(response.statusCode, body);
-    } 
-  }); 
+    }
+  });
 }
